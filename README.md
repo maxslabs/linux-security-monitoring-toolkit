@@ -1,5 +1,7 @@
 # SSH Detect & Protect
 
+![Architecture Diagram](diagrams/diagram.png)
+
 A lightweight Linux SSH brute-force detection and monitoring tool built for SOC practice and cybersecurity learning.
 
 ## Overview
