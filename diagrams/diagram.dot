@@ -1,0 +1,46 @@
+digraph SSH_Monitoring_Tool {
+
+    rankdir=LR;
+    node [shape=box, style=rounded];
+
+    subgraph cluster_system {
+        label="Linux System (T480)";
+        color=lightgrey;
+
+        sshd [label="SSH Service (sshd)"];
+        journal [label="systemd journal (journalctl logs)"];
+    }
+
+    subgraph cluster_tool {
+        label="Security Monitoring Toolkit";
+        color=lightblue;
+
+        parser [label="Log Parser (Python regex)"];
+        analyzer [label="Attack Analyzer"];
+        severity [label="Severity Engine"];
+        reporter [label="Report Generator"];
+    }
+
+    subgraph cluster_output {
+        label="Outputs";
+        color=lightgreen;
+
+        cli [label="CLI Dashboard"];
+        json [label="JSON Report"];
+        logfile [label="Human-readable Log"];
+        logs_folder [label="/logs directory"];
+    }
+
+    sshd -> journal;
+    journal -> parser;
+
+    parser -> analyzer;
+    analyzer -> severity;
+
+    severity -> reporter;
+
+    reporter -> cli;
+    reporter -> json;
+    reporter -> logfile;
+    reporter -> logs_folder;
+}
